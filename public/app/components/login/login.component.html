@@ -3,7 +3,7 @@
 
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <form id="loginForm" class="login-form" (ngSubmit)="onSubmit()">
+            <form id="loginForm" class="login-form" (ngSubmit)="onSubmit($event)">
                 <div class="form-group">
                     <label for="usernameInput">Username</label>
                     <input type="text" name="username" id="usernameInput" class="form-control" [(ngModel)]="username">

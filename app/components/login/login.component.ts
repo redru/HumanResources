@@ -24,8 +24,9 @@ export class LoginComponent implements OnInit {
         this.authService.reset();
     }
 
-    onSubmit(): void {
-
+    onSubmit(event): void {
+        event.preventDefault();
+        this.authService.login(this.username, this.password);
     }
 
 }
