@@ -1,0 +1,7 @@
+# Application
+.idea
+public/app/**/*.js
+
+# Node.js
+node_modules
+typings
