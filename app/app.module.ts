@@ -6,11 +6,12 @@ import { BrowserModule }        from '@angular/platform-browser';
 import { HttpModule }           from '@angular/http';
 import { FormsModule }          from '@angular/forms';
 
+import { AuthService }          from './services/authentication/auth.service';
 import { AppComponent }         from './app.component';
 import { LoginComponent }       from './components/login/login.component';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
 import { AppRoutingModule }     from './app-routing.module';
-import { AuthService }          from './services/authentication/auth.service';
+import { RegisterComponent }    from "./components/register/register.component";
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { AuthService }          from './services/authentication/auth.service';
     declarations: [
         AppComponent,
         DashboardComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     providers: [ AuthService ],
     bootstrap: [ AppComponent ]

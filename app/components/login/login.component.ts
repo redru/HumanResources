@@ -14,7 +14,6 @@ import { AuthService }      from '../../services/authentication/auth.service'
 })
 
 export class LoginComponent implements OnInit {
-
     username: string;
     password: string;
 
@@ -27,12 +26,15 @@ export class LoginComponent implements OnInit {
     onSubmit(event): void {
         event.preventDefault();
 
-        let subscription = this.authService.login(this.username, this.password).subscribe((logged) =>  {
-            if (logged)
-                this.router.navigate([ '/dashboard' ]);
+        let subscription = this.authService.login(this.username, this.password).subscribe(
+            (logged) =>  {
+                subscription.unsubscribe();
 
-            subscription.unsubscribe();
-        });
+                if (logged)
+                    this.router.navigate([ '/dashboard' ]);
+            },
+            (error) => {
+                alert(error.result.message);
+            });
     }
-
 }

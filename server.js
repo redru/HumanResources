@@ -1,20 +1,37 @@
 /**
  * Created by admin on 17/10/2016.
  */
-'use strict';
-const http              = require('http');
-const express           = require('express');
-const bodyParser        = require('body-parser');
+(() => {
+    'use strict';
+    const http              = require('http');
+    const mongoose          = require('mongoose');
+    const express           = require('express');
+    const bodyParser        = require('body-parser');
 
-const app = express();
-app.use(bodyParser.json());
+    mongoose.Promise = global.Promise;
+    mongoose.connect('mongodb://localhost:27017/human_resources', (err) => {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
 
-app.use('/', express.static('./public'));
-app.use('/node_modules', express.static('./node_modules'));
+        console.log('Successfully connected to MongoDB');
+        startServer();
+    });
 
-// APIs mapping
-app.use('/api', require('./api/api'));
+    // HTTP middleware based on express setup
+    const app = express();
+    app.use(bodyParser.json());
 
-http.createServer(app).listen(8080, 'localhost', () => {
-    console.log('Server listening at http://localhost:8080/');
-});
+    app.use('/', express.static('./public'));
+    app.use('/node_modules', express.static('./node_modules'));
+
+    // APIs mapping
+    app.use('/api', require('./api/api'));
+
+    function startServer() {
+        http.createServer(app).listen(8080, 'localhost', () => {
+            console.log('Server listening at http://localhost:8080/');
+        });
+    }
+})();
